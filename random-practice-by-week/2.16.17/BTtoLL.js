@@ -11,13 +11,34 @@ function treeNode(val, lc, rc) {
 
 function BTToLL(root) {
   // current root is the first LLnode
+  let headOfLL = new linkListNode(root.val)
+  let tailOfCurrentLLNode = headOfLL
 
-  // 
+  // inner, in order traversal  
+  function traverse(current) {
+    console.log('current: ', current)
 
+    let nextLinkedNode = new linkListNode(current.val) 
+    tailOfCurrentLLNode.next = nextLinkedNode
+    tailOfCurrentLLNode = tailOfCurrentLLNode.next
 
+    if (current.lc) {
+      traverse(current.lc)
+    }
+    if (current.rc) {
+      traverse(current.rc)
+    }
+  }
 
+  if (root.lc) {
+    traverse(root.lc)
+  }
 
-  // return the head of the LL
+  if (root.rc) {
+    traverse(root.rc)
+  }
+
+  return headOfLL
 }
 
 // traverse
@@ -34,11 +55,12 @@ function traverseLL(head) {
 let treeNodeOne = new treeNode(1)
 let treeNodeTwo = new treeNode(2)
 let treeNodeThree = new treeNode(3)
+
 treeNodeOne.lc = treeNodeTwo
 treeNodeOne.rc = treeNodeThree
 
-traverseLL(treeNodeOne)
-
+// traverseLL(treeNodeOne)
+console.log(BTToLL(treeNodeOne))
 
 ///
 //    1
@@ -46,11 +68,3 @@ traverseLL(treeNodeOne)
 //  3 4
 //
 // 1 -> 1.lc = 2 -> 2.lc = 3 -> 2.rc = 4 -> 1.rc = 5
-
-// currentNode currentLLHead
-// add $me as a LL to currentLLHead.next
-// does $me have lc?
-//   add lc to queue
-// go to next in queue
-
-// no, 
