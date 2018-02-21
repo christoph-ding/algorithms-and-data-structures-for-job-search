@@ -55,9 +55,11 @@ function traverseLL(head) {
 let treeNodeOne = new treeNode(1)
 let treeNodeTwo = new treeNode(2)
 let treeNodeThree = new treeNode(3)
+let treeNodeFour = new treeNode(4)
 
 treeNodeOne.lc = treeNodeTwo
 treeNodeOne.rc = treeNodeThree
+treeNodeThree.rc = treeNodeFour
 
 // traverseLL(treeNodeOne)
 console.log(BTToLL(treeNodeOne))
