@@ -1,13 +1,13 @@
 function mergSortWithIndices(list, helper, low, high) {
   low = low || 0
   high = high || list.length - 1
-  helper = new Array(list.length)
+  helper = helper || new Array(list.length)
 
   // break the currentList into a sorted 'left' list and a sorted 'right' list
   if (low < high) {
     let middle = Math.floor((low + high) / 2)
-    mergSortWithIndices(list, helper, low, middle)
-    mergSortWithIndices(list, helper, middle + 1, high)
+    mergSortWithIndices(list, helper, low, middle) // the 'left'
+    mergSortWithIndices(list, helper, middle + 1, high) // the 'right'
 
     // combine the two lists, and return
     combineTwoSortedLists(list, helper, middle, low, high)
@@ -15,6 +15,21 @@ function mergSortWithIndices(list, helper, low, high) {
 }
 
 function combineTwoSortedLists(list, helper, low, middle, high) {
+  // 'left' is 'low' to 'mid'
+  // 'right' is 'mid' to 'high'
+  // copy both 'left' and 'right' to 'helper'
+  for (let i = low; i < high; i++) {
+    helper[i] = list[i]
+  }
+
+  let helperLeft = low
+  let helperRight = middle + 1
+  let current = low
+
+  // after copying, our helper looks like ... [ ... all the left elements ... all the right elements ... ]
+  // so that really, there are two lists in the single helper list
+  // iterate through 'both' lists in helper, comparing the 'left' vs 'right' elem
+  // 'copying' (really we are just overwriting) the smaller elem into the original list
 
 }
 
