@@ -30,6 +30,20 @@ function combineTwoSortedLists(list, helper, low, middle, high) {
   // so that really, there are two lists in the single helper list
   // iterate through 'both' lists in helper, comparing the 'left' vs 'right' elem
   // 'copying' (really we are just overwriting) the smaller elem into the original list
+  while (helperLeft <= middle && helperRight <= high) {
+    // which ones is smaller?
+    if (helper[helperLeft] < helper[helperRight]) {
+      list[current] = helper[helperLeft]
+      helperLeft = helperLeft + 1
+    } else {
+      list[current] = helper[helperRight]
+      helperRight = helperRight + 1
+    }
+    current = current + 1
+  }
+
+  // the rest
+
 
 }
 
