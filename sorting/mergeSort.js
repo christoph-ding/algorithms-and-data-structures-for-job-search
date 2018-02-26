@@ -42,9 +42,11 @@ function combineTwoSortedLists(list, helper, low, middle, high) {
     current = current + 1
   }
 
-  // the rest
-
-
+  // the rest ...
+  let remaining = middle - helperLeft
+  for (let i = 0; i <= remaining; i++) {
+    array[current + i] = helper[current + i]
+  }
 }
 
 function mergeSort(list) {
