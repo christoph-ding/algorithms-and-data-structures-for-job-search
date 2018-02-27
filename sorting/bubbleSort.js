@@ -2,9 +2,7 @@ function bubbleSort(list) {
   // we go until we make a pass in which no switches were made
   let goAgain = true
 
-
   // we don't swap the last element, hence only iterating to the penultimate element
-
   while (goAgain) {
     // if we go through the entire list without making a swap, we do not iterate anymore
     goAgain = false
@@ -16,8 +14,9 @@ function bubbleSort(list) {
       // testing
       console.log('currentElem: ', currentElem, ' nextElem: ', nextElem)
       if (currentElem > nextElem) {
-
-
+        // swap
+        list[i] = nextElem
+        list[i + 1] = currentElem
         goAgain = true
       }
     }
