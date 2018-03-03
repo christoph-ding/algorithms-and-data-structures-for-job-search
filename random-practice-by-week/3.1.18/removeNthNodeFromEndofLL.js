@@ -13,7 +13,6 @@ function removeNthNodefromEndofLL(headNode, Nth) {
 
   // while loop to put the faster runner ahead
   while (counter < Nth && fastRunner !== null) {
-    console.log('fastRunner: ', fastRunner.key, ' counter: ', counter )
     // what if the list is shorter than 'Nth'?
     fastRunner = fastRunner.next
     counter++
@@ -22,11 +21,17 @@ function removeNthNodefromEndofLL(headNode, Nth) {
   console.log('fast runner starting at: ', fastRunner.key)
 
   // run through the linked list until the fastRunner hits the end
-
-  // the slow runner is now Nth from the end
+  // we really wanna stop at 1 'before' the last one, which is N + 1 from last
+  while (fastRunner.next.next !== null) {
+    console.log('fastRunner: ', fastRunner.key, ' slowRunner: ', slowRunner.key)
+    fastRunner = fastRunner.next
+    slowRunner = slowRunner.next
+  }
+  // the slow runner is now Nth + 1 from the end
+  console.log('the one before the Nth from last: ', slowRunner.key)
 
   // remove it by making its previous.next point to slowrunner's next
-
+  slowRunner.next = slowRunner.next.next
 }
 
 function iterateThroughLL(headOfLinkedList) {
@@ -41,13 +46,16 @@ function iterateThroughLL(headOfLinkedList) {
 }
 
 // test
-let three = new linkedListNode(3)
+let four = new linkedListNode(4)
+let three = new linkedListNode(3, four)
 let two = new linkedListNode(2, three)
 let one = new linkedListNode(1, two)
 
+console.log('before')
 iterateThroughLL(one)
-removeNthNodefromEndofLL(one, 2)
-
+removeNthNodefromEndofLL(one, 1)
+console.log('after')
+iterateThroughLL(one)
 // 1 2 3 
 // 2nd from last - remove 2
 // slow fast
