@@ -1,11 +1,23 @@
 function reverseWords(sentence) {
   // we find the next space so that we have the bounds of a 'word'
-  let start,
-      middle,
-      end;
+  let start = 0
+  let end = 0
+  let endChar
+  let formedWord
+  let reversedWords = []
 
-  // keep doing this while there are more words 
-  // reverse that word
+  // find the next 'word'
+  while (end <= sentence.length) {
+    endChar = sentence[end]
+    if (endChar === ' ' || endChar === undefined) {
+      formedWord = sentence.slice(start, end)
+      reversedWords.push(reverseSingleWord(formedWord))
+      start = end + 1
+    }
+    end++
+  }
+
+  return reversedWords.reverse().join(' ')
 }
 
 function reverseSingleWord(word) {
@@ -42,4 +54,5 @@ function swap(word, indexOne, indexTwo) {
 // extra space (no arrays)
 
 // test
-console.log(reverseSingleWord('robxt'))
+// console.log(reverseSingleWord('robxt'))
+console.log(reverseWords('hello world cat stevens'))
