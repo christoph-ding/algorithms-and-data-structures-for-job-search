@@ -3,25 +3,25 @@ function radixSort(list) {
   let bins = generateBins()
   let helperQueue = list.slice()
 
-  console.log('bins: ', bins) 
-  
-
   // 'normalize' the number of digits in each
-  let maxDigits = findMostDigits()
+  let maxDigits = findMostDigits(list)
+  let currentPlace = maxDigits
   normalize(helperQueue, maxDigits)
-
-  console.log('max digits: ', maxDigits)
-  console.log('helperQueue: ', helperQueue)
   
+  let currentDigit
 
-  // for each 'digit's place' in the element in key with the most digits
-    // put each element, using it's 'digits place', put into proper 'bin', maintaing order
+  while (currentPlace > 0) {
+    helperQueue.forEach((element) => {
+      currentDigit = element[currentPlace - 1]
+      bins[currentDigit].push(element)
+    })
 
-    // if unncessary, add more 'zeroes'
+    helperQueue = requeue(bins, helperQueue)
+    bins = generateBins()
+    currentPlace--
+  }
 
-    // after finishing sorting into bins, requeue into helperQueue
-
-
+  reNumber(helperQueue)
   return helperQueue
 }
 
@@ -56,9 +56,8 @@ function normalize(list, digits) {
   list.forEach((element, index) => {
     elementAsString = String(element)
     elementLength = elementAsString.length
-    leadingZeroes = new Array(digits - elementLength).join('0')
+    leadingZeroes = new Array(digits - elementLength + 1).join('0')
     normalizedElement = leadingZeroes.concat(elementAsString)
-    console.log('element: ', element, ' normalizedElement: ', normalizedElement)
     list[index] = normalizedElement
   })
 }
@@ -68,10 +67,27 @@ function sortIntoBins(bins, list) {
 }
 
 function requeue(bins, helperQueue) {
+  helperQueue = []
 
+  let currentBin
+  let helperQueueIndex = 0
+  for (let i = 0; i <= 9; i++) {
+    currentBin = bins[i]
+    currentBin.forEach((element) => {
+      helperQueue[helperQueueIndex] = element
+      helperQueueIndex++
+    })
+  }
+  return helperQueue
+}
+
+function reNumber(list) {
+  list.forEach((element, index) => {
+    list[index] = Number(element)
+  })
 }
 
 // tests
 let list = [100, 91, 999, 20, 7, 543, 1293, 76, 823, 3918]
-normalize(list, 10)
-console.log(list)
+console.log(radixSort(list))
+
