@@ -1,20 +1,20 @@
 function isUniqueExtraSpace(input) {
   let space = {}
-  let answer = true
 
-  input.split('').forEach((char) => {
+  return input.split('').every((char) => {
     if (space.hasOwnProperty(char)) {
-      answer = false
+      return false
     } else {
       space[char] = true
+      return true
     }
   })
-  return answer
 }
 
+
 // tests
-// console.log(isUniqueExtraSpace('abc')) // true
-// console.log(isUniqueExtraSpace('abcc')) // false
+console.log(isUniqueExtraSpace('abc')) // true
+console.log(isUniqueExtraSpace('abcc')) // false
 
 function isUniqueNoSpace(input) {
   let sortedInput = input.split('').sort()
@@ -26,5 +26,5 @@ function isUniqueNoSpace(input) {
 }
 
 // tests
-console.log(isUniqueNoSpace('zeogkxabc')) // true
-console.log(isUniqueNoSpace('zeogkxabac')) // false
+// console.log(isUniqueNoSpace('zeogkxabc')) // true
+// console.log(isUniqueNoSpace('zeogkxabac')) // false
