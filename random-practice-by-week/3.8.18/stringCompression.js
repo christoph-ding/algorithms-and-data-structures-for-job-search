@@ -2,43 +2,37 @@ function stringCompression(characters) {
   let currentCharacterIndex = 0,
       currentCharacter = characters[currentCharacterIndex],
       runnerIndex = currentCharacterIndex + 1,
-      differenceCurrentRunner = runnerIndex - currentCharacterIndex
+      differenceCurrentRunner = runnerIndex - currentCharacterIndex,
       runnerCharacter;
 
   let countDigits = []
 
   while (runnerIndex <= characters.length) {
-    // update the runner character
     runnerCharacter = characters[runnerIndex]
 
-    console.log('runnerCharacter: ', runnerCharacter,
-                'currentCharacter: ', currentCharacter,
-                'difference: ', differenceCurrentRunner)
-
-    // are they different now? (current)
     if (runnerCharacter !== currentCharacter) {
-      differenceCurrentRunner = runnerIndex - currentCharacterIndex
-      // what is the difference between 2 indices?
-      // if only 1, rules...
-      if (differenceCurrentRunner === 1) {
-        // no writes
-        // currentCharacterIndex advances 1
-      } else {
-      // if more 1, rules...
-      // move currentCharacterIndex according to 'difference'
-        countDigits = differenceCurrentRunner.string().split('')
-        console.log('countDigits: ', countDigits)
+      if (differenceCurrentRunner > 1) {
+        countDigits = differenceCurrentRunner.toString().split('')
         countDigits.forEach((digit) => {
-          characters[currentCharacterIndex++] = digit
-        }
-        console.log('characters: ', characters)
+          characters[++currentCharacterIndex] = digit
+        })
       }
-      // currentCharacter updates to new currentCharacter (the one just 'found' by fast runner)
 
+      if (runnerCharacter !== undefined) {
+        currentCharacter = runnerCharacter
+        characters[++currentCharacterIndex] = currentCharacter
+      }
+      differenceCurrentRunner = 0
     }
-    // the runner will advance regardless    
+    differenceCurrentRunner++
     runnerIndex++
+  }
+
+  return characters.slice(0, ++currentCharacterIndex)
 }
 
 // tests
-console.log(stringCompression(['a', 'a', 'b', 'a', 'c', 'c'])) // [a, 2, b, c, 2]
+let chars = ['a', 'a', 'a','b', 'b', 'b', 'c', 'c', 'd', 'a', 'a']
+console.log(chars)
+chars = stringCompression(chars) // [a, 2, b]
+console.log(chars)
