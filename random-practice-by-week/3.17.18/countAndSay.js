@@ -1,16 +1,33 @@
 function countAndSay(n) {
   let previous = [1]
-  let current = []
+  let currentCountAndSay = []
   let round = 2
 
-  // helper variables for forming 'current' from 'previous'
-  let cur
+  // helper variables for forming 'currentCountAndSay' from 'previous'
+  let currentSought,
+      runSize
 
   while (round++ <= n) {
-    // update current
+    // update currentCountAndSay
+    currentSought = previous[0]
+    runSize = 0
 
+    previous.forEach((currentChar, index) => {
+      if (currentChar !== currentSought) {
+        currentCountAndSay.push(runSize)
+        currentCountAndSay.push(currentSought)
+        runSize = 1
+      } else {
+        runSize++
+        if (index === previous.length - 1) {
+           currentCountAndSay.push(runSize)
+           currentCountAndSay.push(currentSought)
+        }
+      }
+    })
 
-    
+    previous = currentCountAndSay
+    currentCountAndSay = []
   }
 
   return previous
