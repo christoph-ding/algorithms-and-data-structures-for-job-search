@@ -5,12 +5,17 @@ function countAndSay(n) {
 
   // helper variables for forming 'currentCountAndSay' from 'previous'
   let currentSought,
-      runSize
+      runSize,
+      previousIndex
 
   while (round <= n) {
     // update currentCountAndSay
+    previousIndex = 0
     currentSought = previous[0]
     runSize = 0
+
+    while ()
+
 
     console.log('round: ', round, ' previous: ', previous, ' sought: ', currentSought)
 
@@ -23,7 +28,7 @@ function countAndSay(n) {
       } else {
         runSize++
         if (index === previous.length - 1) {
-          console.log()
+          console.log('yo')
            currentCountAndSay.push(runSize)
            currentCountAndSay.push(currentSought)
         }
