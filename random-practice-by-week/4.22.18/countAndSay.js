@@ -24,3 +24,7 @@ function formFromList(list) {
 
   return output
 }
+
+// tests
+
+console.log(countAndSay([1])) // [ 1, 1 ]
